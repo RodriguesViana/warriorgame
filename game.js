@@ -4,6 +4,7 @@
 //   Musica de fundo
 
 //A fazer:
+//   Refactoring dos personagens
 //   Testar se eles estao encontrando
 // k  Dragao se mexer pros lados
 // k  Dragao tomar dano e morrer
