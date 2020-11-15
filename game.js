@@ -103,7 +103,7 @@ $(function () {
             `${imgPathPotion}potion.png`,
         ],
         location: {
-            x: 700,
+            x: 600,
             y: -100,
         },
         walk: function (moveX, moveY) {
