@@ -5,8 +5,8 @@
 
 //A fazer:
 //   Testar se eles estao encontrando
-//   Dragao se mexer pros lados
-//   Dragao tomar dano e morrer
+// k  Dragao se mexer pros lados
+// k  Dragao tomar dano e morrer
 //   Dragao atacar
 //   Warrior pegar os equipamentos
 
@@ -20,6 +20,7 @@ $(function () {
 
     const imgPath = 'assets/warrior/';
     const imgPathDragon = 'assets/dragon/';
+    const imgPathPotion = 'assets/';
 
     const warrior = {
         equipment: ["sword", "shield"],
@@ -80,6 +81,29 @@ $(function () {
         location: {
             x: 400,
             y: -200,
+        },
+        walk: function (moveX, moveY) {
+            this.location.x += moveX;
+            this.location.y += moveY;
+        },
+        strike: function (deplete) {
+            console.log(this.energy);
+            this.energy -= deplete;
+        },
+        pickUpEquipment: function (item) {
+            this.equipment.push(item);
+        }
+    };
+
+    const potion = {
+        energy: 200,
+        thisImage: 0,
+        images: [
+            `${imgPathPotion}potion.png`,
+        ],
+        location: {
+            x: 600,
+            y: -100,
         },
         walk: function (moveX, moveY) {
             this.location.x += moveX;
@@ -291,6 +315,15 @@ $(function () {
         myDragon.css('top', -dragon.location.y);
     }
     initializeDragon();
+
+    let myPotion = $('#potion');
+    let myPotionImg = $('#potionImg');
+
+    const initializePotion = function () {
+        myPotion.css('left', potion.location.x);
+        myPotion.css('top', -potion.location.y);
+    }
+    initializePotion();
 
 });
 
