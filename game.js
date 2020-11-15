@@ -5,8 +5,8 @@
 
 //A fazer:
 //   Testar se eles estao encontrando
-//   Dragao se mexer pros lados
-//   Dragao tomar dano e morrer
+// k  Dragao se mexer pros lados
+// k  Dragao tomar dano e morrer
 //   Dragao atacar
 //   Warrior pegar os equipamentos
 
@@ -18,30 +18,30 @@
 
 $(function () {
 
-    const imgPath = 'assets/warrior/';
-    const imgPathDragon = 'assets/dragon/';
-
+    const imgPath = 'assets';
+    
+    let imgPathWarrior = `{imgPath}/warrior/`
     const warrior = {
         equipment: ["sword", "shield"],
         energy: 100,
         thisImage: 0,
         images: {
             'R': [
-                `${imgPath}warriorMini-r1.png`,
-                `${imgPath}warriorMini-r2.png`,
-                `${imgPath}warriorMini-r1.png`,
-                `${imgPath}warriorMini-r3.png`
+                `${imgPathWarrior}warriorMini-r1.png`,
+                `${imgPathWarrior}warriorMini-r2.png`,
+                `${imgPathWarrior}warriorMini-r1.png`,
+                `${imgPathWarrior}warriorMini-r3.png`
             ],
             'L': [
-                `${imgPath}warriorMini-l1.png`,
-                `${imgPath}warriorMini-l2.png`,
-                `${imgPath}warriorMini-l1.png`,
-                `${imgPath}warriorMini-l3.png`
+                `${imgPathWarrior}warriorMini-l1.png`,
+                `${imgPathWarrior}warriorMini-l2.png`,
+                `${imgPathWarrior}warriorMini-l1.png`,
+                `${imgPathWarrior}warriorMini-l3.png`
             ],
             'S': [
-                `${imgPath}warriorMini-st1.png`,
-                `${imgPath}warriorMini-st2.png`,
-                `${imgPath}warriorMini-r1.png`
+                `${imgPathWarrior}warriorMini-st1.png`,
+                `${imgPathWarrior}warriorMini-st2.png`,
+                `${imgPathWarrior}warriorMini-r1.png`
             ]
         },
         location: {
@@ -60,6 +60,7 @@ $(function () {
         }
     };
 
+    let imgPathDragon = `${imgPath}/dragon/`;
     const dragon = {
         energy: 200,
         thisImage: 0,
@@ -80,6 +81,30 @@ $(function () {
         location: {
             x: 400,
             y: -200,
+        },
+        walk: function (moveX, moveY) {
+            this.location.x += moveX;
+            this.location.y += moveY;
+        },
+        strike: function (deplete) {
+            console.log(this.energy);
+            this.energy -= deplete;
+        },
+        pickUpEquipment: function (item) {
+            this.equipment.push(item);
+        }
+    };
+
+    let imgPathPotion = `${imgPath}/potions/`;
+    const potion = {
+        energy: 200,
+        thisImage: 0,
+        images: [
+            `${imgPathPotion}potion.png`,
+        ],
+        location: {
+            x: 700,
+            y: -100,
         },
         walk: function (moveX, moveY) {
             this.location.x += moveX;
@@ -291,6 +316,15 @@ $(function () {
         myDragon.css('top', -dragon.location.y);
     }
     initializeDragon();
+
+    let myPotion = $('#potion');
+    let myPotionImg = $('#potionImg');
+
+    const initializePotion = function () {
+        myPotion.css('left', potion.location.x);
+        myPotion.css('top', -potion.location.y);
+    }
+    initializePotion();
 
 });
 

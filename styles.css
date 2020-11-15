@@ -312,3 +312,13 @@ html {
     top: 0;
     right: 0;
 }
+
+.potion {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
+
+.potionImg {
+    width: 30px;
+}
