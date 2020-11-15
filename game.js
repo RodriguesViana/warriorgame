@@ -18,31 +18,30 @@
 
 $(function () {
 
-    const imgPath = 'assets/warrior/';
-    const imgPathDragon = 'assets/dragon/';
-    const imgPathPotion = 'assets/';
-
+    const imgPath = 'assets';
+    
+    let imgPathWarrior = `{imgPath}/warrior/`
     const warrior = {
         equipment: ["sword", "shield"],
         energy: 100,
         thisImage: 0,
         images: {
             'R': [
-                `${imgPath}warriorMini-r1.png`,
-                `${imgPath}warriorMini-r2.png`,
-                `${imgPath}warriorMini-r1.png`,
-                `${imgPath}warriorMini-r3.png`
+                `${imgPathWarrior}warriorMini-r1.png`,
+                `${imgPathWarrior}warriorMini-r2.png`,
+                `${imgPathWarrior}warriorMini-r1.png`,
+                `${imgPathWarrior}warriorMini-r3.png`
             ],
             'L': [
-                `${imgPath}warriorMini-l1.png`,
-                `${imgPath}warriorMini-l2.png`,
-                `${imgPath}warriorMini-l1.png`,
-                `${imgPath}warriorMini-l3.png`
+                `${imgPathWarrior}warriorMini-l1.png`,
+                `${imgPathWarrior}warriorMini-l2.png`,
+                `${imgPathWarrior}warriorMini-l1.png`,
+                `${imgPathWarrior}warriorMini-l3.png`
             ],
             'S': [
-                `${imgPath}warriorMini-st1.png`,
-                `${imgPath}warriorMini-st2.png`,
-                `${imgPath}warriorMini-r1.png`
+                `${imgPathWarrior}warriorMini-st1.png`,
+                `${imgPathWarrior}warriorMini-st2.png`,
+                `${imgPathWarrior}warriorMini-r1.png`
             ]
         },
         location: {
@@ -61,6 +60,7 @@ $(function () {
         }
     };
 
+    let imgPathDragon = `${imgPath}/dragon/`;
     const dragon = {
         energy: 200,
         thisImage: 0,
@@ -95,6 +95,7 @@ $(function () {
         }
     };
 
+    let imgPathPotion = `${imgPath}/potions/`;
     const potion = {
         energy: 200,
         thisImage: 0,
