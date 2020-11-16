@@ -16,6 +16,8 @@
 //   Conversas
 //   Pocoes magicas
 //   Dados para D10
+//   Transform the dragon into a person
+//   Add animations to characters
 
 $(function () {
 
