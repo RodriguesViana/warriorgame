@@ -23,7 +23,7 @@ $(function () {
 
     const imgPath = 'assets';
     
-    let imgPathWarrior = `{imgPath}/warrior/`
+    let imgPathWarrior = `${imgPath}/warrior/`
     const warrior = {
         equipment: ["sword", "shield"],
         energy: 100,
