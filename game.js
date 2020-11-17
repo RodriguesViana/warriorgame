@@ -332,30 +332,35 @@ $(function () {
     initializePotion();
 
     if (window.DeviceMotionEvent) {
+        alert('Device Motion added');
         window.addEventListener("devicemotion", motion, false);
     } else {
-        console.log("DeviceMotionEvent is not supported");
+        alert("DeviceMotionEvent is not supported");
     }
     function motion(event) {
-        console.log("Accelerometer: "
+        
+        let text = ("Accelerometer: "
             + event.accelerationIncludingGravity.x + ", "
             + event.accelerationIncludingGravity.y + ", "
             + event.accelerationIncludingGravity.z
         );
+        alert(text);
     }
 
     if (window.DeviceOrientationEvent) {
+        alert('Orientation added');
         window.addEventListener("deviceorientation", orientation, false);
     } else {
-        console.log("DeviceOrientationEvent is not supported");
+        alert("DeviceOrientationEvent is not supported");
     }
 
     function orientation(event) {
-        console.log("Magnetometer: "
+        let text=("Magnetometer: "
             + event.alpha + ", "
             + event.beta + ", "
             + event.gamma
         );
+        alert(text);
     }
 
 });
