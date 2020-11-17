@@ -331,30 +331,20 @@ $(function () {
     }
     initializePotion();
 
-    window.addEventListener("deviceorientation", handleOrientation, true);
+    window.addEventListener("devicemotion", handleMotion());
 
-    function handleOrientation(event) {
-        var absolute = event.absolute;
-        var alpha = event.alpha;
-        var beta = event.beta;
-        var gamma = event.gamma;
-        
+    function handleMotion(event) {
         console.log('Now working on mobile devices');
 
-        if (alpha > 180) { //Z: 0 to 360
-            console.log('Z');
-            walk(0, warrior.stepSize, 'warrior');
-        }
-
-        if (beta > 0) { //X: -180 to 180
-            console.log('X');
-            walk(-warrior.stepSize, 0, 'warrior');
-        }
-
-        if (gamma > 0) { //Y: -90 to 90
-            console.log('Y');
-            walk(0, -warrior.stepSize, 'warrior');
-        }
+        let x = event.acceleration.x;
+        console.log(`X: ${x}`);
+        let y = event.acceleration.y;
+        console.log(`Y: ${y}`);
+        let z = event.acceleration.z;
+        console.log(`Z: ${z}`);
+        
+        
+        
 
     }
 
