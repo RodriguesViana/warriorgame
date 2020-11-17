@@ -329,6 +329,8 @@ $(function () {
     }
     initializePotion();
 
+    window.addEventListener("deviceorientation", handleOrientation, true);
+    
     function handleOrientation(event) {
         var absolute = event.absolute;
         var alpha = event.alpha;
