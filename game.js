@@ -331,7 +331,7 @@ $(function () {
     }
     initializePotion();
 
-    window.addEventListener("devicemotion", handleMotion);
+    
 
 });
 
