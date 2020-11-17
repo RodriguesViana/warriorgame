@@ -27,6 +27,7 @@ $(function () {
     const warrior = {
         equipment: ["sword", "shield"],
         energy: 100,
+        stepSize: 10,
         thisImage: 0,
         images: {
             'R': [
@@ -67,6 +68,7 @@ $(function () {
     const dragon = {
         energy: 200,
         thisImage: 0,
+        stepSize: 10,
         images: [
             `${imgPathDragon}dragon1.png`,
             `${imgPathDragon}dragon2.png`,
@@ -138,16 +140,16 @@ $(function () {
             switch (key) {
                 //Warrior
                 case 'w':
-                    walk(0, warriorStep, 'warrior');
+                    walk(0, warrior.stepSize, 'warrior');
                     break;
                 case 'a':
-                    walk(-warriorStep, 0, 'warrior');
+                    walk(-warrior.stepSize, 0, 'warrior');
                     break;
                 case 's':
-                    walk(0, -warriorStep, 'warrior');
+                    walk(0, -warrior.stepSize, 'warrior');
                     break;
                 case 'd':
-                    walk(warriorStep, 0, 'warrior');
+                    walk(warrior.stepSize, 0, 'warrior');
                     break;
                 case ' ':
                     strike(warriorDamage);
@@ -155,16 +157,16 @@ $(function () {
 
                 //Dragon
                 case 'l':
-                    walk(10, 0, 'dragon');
+                    walk(dragon.stepSize, 0, 'dragon');
                     break;
                 case 'j':
-                    walk(-10, 0, 'dragon');
+                    walk(-dragon.stepSize, 0, 'dragon');
                     break;
                 case 'k':
-                    walk(0, -10, 'dragon');
+                    walk(0, -dragon.stepSize, 'dragon');
                     break;
                 case 'i':
-                    walk(0, 10, 'dragon');
+                    walk(0, dragon.stepSize, 'dragon');
                     break;
 
                 case '3':
@@ -336,17 +338,21 @@ $(function () {
         var alpha = event.alpha;
         var beta = event.beta;
         var gamma = event.gamma;
+        
 
         if (alpha > 180) { //Z: 0 to 360
             alert('Z');
+            walk(0, warrior.stepSize, 'warrior');
         }
 
         if (beta > 0) { //X: -180 to 180
             alert('X');
+            walk(-warrior.stepSize, 0, 'warrior');
         }
 
         if (gamma > 0) { //Y: -90 to 90
             alert('Y');
+            walk(0, -warrior.stepSize, 'warrior');
         }
     }
 
