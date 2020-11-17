@@ -334,18 +334,20 @@ $(function () {
     
 
 });
-
+alert('Is device ready?');
 document.addEventListener(
     "deviceready", onDeviceReady, false);
 
 
 function onDeviceReady() {
     console.log('added accelerometer');
+    alert('Added accelerometer');
     navigator.accelerometer.getCurrentAcceleration(
         onSuccess, onError);
 }
 
 function onSuccess(acceleration) {
+    alert('Data!');
     var accElement =
         document.getElementById('accelerometerData');
 
