@@ -354,6 +354,7 @@ $(function () {
             alert('Y');
             walk(0, -warrior.stepSize, 'warrior');
         }
+        
     }
 
 });
