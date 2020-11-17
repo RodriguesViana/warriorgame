@@ -339,22 +339,23 @@ $(function () {
         var beta = event.beta;
         var gamma = event.gamma;
         
+        console.log('Now working on mobile devices');
 
         if (alpha > 180) { //Z: 0 to 360
-            alert('Z');
+            console.log('Z');
             walk(0, warrior.stepSize, 'warrior');
         }
 
         if (beta > 0) { //X: -180 to 180
-            alert('X');
+            console.log('X');
             walk(-warrior.stepSize, 0, 'warrior');
         }
 
         if (gamma > 0) { //Y: -90 to 90
-            alert('Y');
+            console.log('Y');
             walk(0, -warrior.stepSize, 'warrior');
         }
-        
+
     }
 
 });
