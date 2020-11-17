@@ -303,7 +303,7 @@ $(function () {
         }, 200);
 
     }
-    animateDragon();
+    //animateDragon();
 
     const pickUpEquipment = function () {
         //Pick up a "helmet"
@@ -331,7 +331,7 @@ $(function () {
     }
     initializePotion();
 
-    window.addEventListener("devicemotion", handleMotion(e));
+    window.addEventListener("devicemotion", handleMotion);
 
     function handleMotion(event) {
         console.log('Now working on mobile devices');
@@ -342,10 +342,6 @@ $(function () {
         console.log(`Y: ${y}`);
         let z = event.acceleration.z;
         console.log(`Z: ${z}`);
-        
-        
-        
-
     }
 
 });
