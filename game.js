@@ -331,7 +331,7 @@ $(function () {
     }
     initializePotion();
 
-    window.addEventListener("devicemotion", handleMotion());
+    window.addEventListener("devicemotion", handleMotion(e));
 
     function handleMotion(event) {
         console.log('Now working on mobile devices');
