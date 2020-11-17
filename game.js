@@ -329,5 +329,26 @@ $(function () {
     }
     initializePotion();
 
+    window.addEventListener("deviceorientation", handleOrientation, true);
+
+    function handleOrientation(event) {
+        var absolute = event.absolute;
+        var alpha = event.alpha;
+        var beta = event.beta;
+        var gamma = event.gamma;
+
+        if (alpha > 180) { //Z: 0 to 360
+            alert('Z');
+        }
+
+        if (beta > 0) { //X: -180 to 180
+            alert('X');
+        }
+
+        if (gamma > 0) { //Y: -90 to 90
+            alert('Y');
+        }
+    }
+
 });
 
