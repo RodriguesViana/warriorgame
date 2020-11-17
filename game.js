@@ -335,6 +335,16 @@ $(function () {
 
 });
 
+document.addEventListener(
+    "deviceready", onDeviceReady, false);
+
+
+function onDeviceReady() {
+    console.log('added accelerometer');
+    navigator.accelerometer.getCurrentAcceleration(
+        onSuccess, onError);
+}
+
 function onSuccess(acceleration) {
     var accElement =
         document.getElementById('accelerometerData');
@@ -344,5 +354,11 @@ function onSuccess(acceleration) {
         'Acceleration Y: ' + acceleration.y + '<br />' +
         'Acceleration Z: ' + acceleration.z + '<br />' +
         'Timestamp: ' + acceleration.timestamp;
+}
+
+function onError(error) {
+    // Handle any errors we may face
+    alert('error');
+    console.log(error);
 }
 
