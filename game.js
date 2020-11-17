@@ -333,16 +333,16 @@ $(function () {
 
     window.addEventListener("devicemotion", handleMotion);
 
-    function handleMotion(event) {
-        console.log('Now working on mobile devices');
-
-        let x = event.acceleration.x;
-        console.log(`X: ${x}`);
-        let y = event.acceleration.y;
-        console.log(`Y: ${y}`);
-        let z = event.acceleration.z;
-        console.log(`Z: ${z}`);
-    }
-
 });
+
+function onSuccess(acceleration) {
+    var accElement =
+        document.getElementById('accelerometerData');
+
+    accElement.innerHTML =
+        'Acceleration X: ' + acceleration.x + '<br />' +
+        'Acceleration Y: ' + acceleration.y + '<br />' +
+        'Acceleration Z: ' + acceleration.z + '<br />' +
+        'Timestamp: ' + acceleration.timestamp;
+}
 
