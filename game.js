@@ -331,36 +331,31 @@ $(function () {
     }
     initializePotion();
 
-    
+    if (window.DeviceMotionEvent) {
+        window.addEventListener("devicemotion", motion, false);
+    } else {
+        console.log("DeviceMotionEvent is not supported");
+    }
+    function motion(event) {
+        console.log("Accelerometer: "
+            + event.accelerationIncludingGravity.x + ", "
+            + event.accelerationIncludingGravity.y + ", "
+            + event.accelerationIncludingGravity.z
+        );
+    }
+
+    if (window.DeviceOrientationEvent) {
+        window.addEventListener("deviceorientation", orientation, false);
+    } else {
+        console.log("DeviceOrientationEvent is not supported");
+    }
+
+    function orientation(event) {
+        console.log("Magnetometer: "
+            + event.alpha + ", "
+            + event.beta + ", "
+            + event.gamma
+        );
+    }
 
 });
-alert('Is device ready?');
-document.addEventListener(
-    "deviceready", onDeviceReady, false);
-
-
-function onDeviceReady() {
-    console.log('added accelerometer');
-    alert('Added accelerometer');
-    navigator.accelerometer.getCurrentAcceleration(
-        onSuccess, onError);
-}
-
-function onSuccess(acceleration) {
-    alert('Data!');
-    var accElement =
-        document.getElementById('accelerometerData');
-
-    accElement.innerHTML =
-        'Acceleration X: ' + acceleration.x + '<br />' +
-        'Acceleration Y: ' + acceleration.y + '<br />' +
-        'Acceleration Z: ' + acceleration.z + '<br />' +
-        'Timestamp: ' + acceleration.timestamp;
-}
-
-function onError(error) {
-    // Handle any errors we may face
-    alert('error');
-    console.log(error);
-}
-
