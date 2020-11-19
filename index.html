@@ -21,8 +21,13 @@
                         .then(response => {
                             // (optional) Do something after API prompt dismissed.
                             if (response == "granted") {
-                                window.addEventListener("devicemotion", (e) => {
+                                window.addEventListener("devicemotion", (event) => {
                                     // do something for 'e' here.
+                                    var x = event.accelerationIncludingGravity.x;
+                                    var y = event.accelerationIncludingGravity.y;
+                                    var z = event.accelerationIncludingGravity.z;
+                                    alert('moveu!'+x+" "+y+" "+z);
+
                                 })
                             }
                         })
