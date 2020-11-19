@@ -21,8 +21,9 @@
 
 $(function () {
 
+    console.log('start');
     const imgPath = 'assets';
-    
+
     let imgPathWarrior = `${imgPath}/warrior/`
     const warrior = {
         equipment: ["sword", "shield"],
@@ -128,19 +129,19 @@ $(function () {
     let myWarriorImg = $('#warriorImg');
 
     $(document).on('keydown', function (e) {
-        // console.log(e);
+        console.log(e);
         e.preventDefault();
         callWarrior(e.key);
     });
 
 
-    $('cenario').bind('tap', function (e) {
-        // console.log(e);
-        // e.preventDefault();
-        console.log(e);
-        console.log('tap!');
-        callWarrior('d');
-    });
+    // $('cenario').bind('tap', function (e) {
+    //     // console.log(e);
+    //     // e.preventDefault();
+    //     console.log(e);
+    //     console.log('tap!');
+    //     callWarrior('d');
+    // });
 
     const callWarrior = function (key) {
         let warriorStep = 10;
@@ -257,9 +258,9 @@ $(function () {
 
 
         if (isTouching(warrior.location, dragon.location)) {
-            
+
             reduction = points * 3;
-            dragon.strike(points*3.5);
+            dragon.strike(points * 3.5);
             let currentWD = $(".lifeBarGreenDragon").width();
             $(".lifeBarGreenDragon").width(currentWD - reduction);
             // $('.lifeBarGreenDragon').hide();
@@ -275,7 +276,7 @@ $(function () {
     }
 
     const isTouching = function (wl, dl) {
-        
+
 
         if (wl.x == dl.x && wl.y == dl.y) {
             console.log("Warrior:");
@@ -340,36 +341,62 @@ $(function () {
     }
     initializePotion();
 
-    if (window.DeviceMotionEvent) {
-        // alert('Device Motion added');
-        window.addEventListener("devicemotion", motion, false);
-    } else {
-        alert("DeviceMotionEvent is not supported");
-    }
-    function motion(event) {
-        
-        let text = ("Accelerometer: "
-            + event.accelerationIncludingGravity.x + ", "
-            + event.accelerationIncludingGravity.y + ", "
-            + event.accelerationIncludingGravity.z
-        );
-        alert(text);
-    }
+    // if (window.DeviceMotionEvent) {
+    //     // alert('Device Motion added');
+    //     window.addEventListener("devicemotion", motion, false);
+    // } else {
+    //     alert("DeviceMotionEvent is not supported");
+    // }
+    // function motion(event) {
 
-    if (window.DeviceOrientationEvent) {
-        // alert('Orientation added');
-        window.addEventListener("deviceorientation", orientation, false);
-    } else {
-        alert("DeviceOrientationEvent is not supported");
-    }
+    //     let text = ("Accelerometer: "
+    //         + event.accelerationIncludingGravity.x + ", "
+    //         + event.accelerationIncludingGravity.y + ", "
+    //         + event.accelerationIncludingGravity.z
+    //     );
+    //     alert(text);
+    // }
 
-    function orientation(event) {
-        let text=("Magnetometer: "
-            + event.alpha + ", "
-            + event.beta + ", "
-            + event.gamma
-        );
-        alert(text);
+    // if (window.DeviceOrientationEvent) {
+    //     // alert('Orientation added');
+    //     window.addEventListener("deviceorientation", orientation, false);
+    // } else {
+    //     alert("DeviceOrientationEvent is not supported");
+    // }
+
+    // function orientation(event) {
+    //     let text=("Magnetometer: "
+    //         + event.alpha + ", "
+    //         + event.beta + ", "
+    //         + event.gamma
+    //     );
+    //     alert(text);
+    // }
+
+    function permission() {
+        console.log('event');
+        if (typeof (DeviceMotionEvent) !== "undefined" && typeof (DeviceMotionEvent.requestPermission) === "function") {
+            // (optional) Do something before API request prompt.
+            DeviceMotionEvent.requestPermission()
+                .then(response => {
+                    // (optional) Do something after API prompt dismissed.
+                    if (response == "granted") {
+                        window.addEventListener("devicemotion", (event) => {
+                            // do something for 'e' here.
+                            var x = event.accelerationIncludingGravity.x;
+                            var y = event.accelerationIncludingGravity.y;
+                            var z = event.accelerationIncludingGravity.z;
+                            //alert('moveu!'+x+" "+y+" "+z);
+                            console.log('event');
+                            walk(warrior.stepSize, 0, 'warrior');
+                        })
+                    }
+                })
+                .catch(console.error)
+        } else {
+            alert("DeviceMotionEvent is not defined");
+        }
     }
+    $("#request").on("click", permission);
 
 });
