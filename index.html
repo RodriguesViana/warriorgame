@@ -13,6 +13,30 @@
 
 
 <body>
+    <script>
+        function permission() {
+                if (typeof (DeviceMotionEvent) !== "undefined" && typeof (DeviceMotionEvent.requestPermission) === "function") {
+                    // (optional) Do something before API request prompt.
+                    DeviceMotionEvent.requestPermission()
+                        .then(response => {
+                            // (optional) Do something after API prompt dismissed.
+                            if (response == "granted") {
+                                window.addEventListener("devicemotion", (e) => {
+                                    // do something for 'e' here.
+                                })
+                            }
+                        })
+                        .catch(console.error)
+                } else {
+                    alert("DeviceMotionEvent is not defined");
+                }
+            }
+            // const btn = document.getElementById("request");
+            // btn.addEventListener("click", permission);
+    </script>
+    
+    <button id="request" onclick="permission()">Request orientation permission</button>
+
     <header class='container'>
        <div class='enemies'>
             <h1>The Warrior</h1>
@@ -26,7 +50,7 @@
         </div>
         
     </header>
-    <div id='accelerometerData container'>Motion:</div>
+    <!-- <div id='accelerometerData container'>Motion:</div> -->
 
     <main class='container geral'>
         <div id='cenario' class='cenario'>
@@ -54,9 +78,12 @@
         
     </main>
 
+    
     <script src='https://code.jquery.com/jquery-3.4.0.min.js'
         integrity='sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=' crossorigin='anonymous'></script>
-    <script src='game.js'></script>
+
+    
+
 
 </body>
 

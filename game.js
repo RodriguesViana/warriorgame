@@ -133,6 +133,15 @@ $(function () {
         callWarrior(e.key);
     });
 
+
+    $('cenario').bind('tap', function (e) {
+        // console.log(e);
+        // e.preventDefault();
+        console.log(e);
+        console.log('tap!');
+        callWarrior('d');
+    });
+
     const callWarrior = function (key) {
         let warriorStep = 10;
         let warriorDamage = 2;
@@ -332,7 +341,7 @@ $(function () {
     initializePotion();
 
     if (window.DeviceMotionEvent) {
-        alert('Device Motion added');
+        // alert('Device Motion added');
         window.addEventListener("devicemotion", motion, false);
     } else {
         alert("DeviceMotionEvent is not supported");
@@ -348,7 +357,7 @@ $(function () {
     }
 
     if (window.DeviceOrientationEvent) {
-        alert('Orientation added');
+        // alert('Orientation added');
         window.addEventListener("deviceorientation", orientation, false);
     } else {
         alert("DeviceOrientationEvent is not supported");
