@@ -374,7 +374,7 @@ $(function () {
     // }
 
     function permission() {
-        console.log('event');
+        console.log('event asking for permission');
         if (typeof (DeviceMotionEvent) !== "undefined" && typeof (DeviceMotionEvent.requestPermission) === "function") {
             // (optional) Do something before API request prompt.
             DeviceMotionEvent.requestPermission()
@@ -386,8 +386,7 @@ $(function () {
                             var x = event.accelerationIncludingGravity.x;
                             var y = event.accelerationIncludingGravity.y;
                             var z = event.accelerationIncludingGravity.z;
-                            //alert('moveu!'+x+" "+y+" "+z);
-                            // console.log('event');
+                            alert('moveu!'+x+" "+y+" "+z);
                             walk(warrior.stepSize, 0, 'warrior'); console.log(`moveu ${x}, ${y}, ${z}`);
                             $('#coordinates').html(`moveu ${x}, ${y}, ${ z}`);
                         })
