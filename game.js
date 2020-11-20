@@ -375,7 +375,7 @@ $(function () {
 
     function permission() {
         console.log('event asking for permission');
-        $('#coordinates').append('1 Asked permission. ');
+        // $('#coordinates').append('Asked permission. ');
         if (typeof (DeviceMotionEvent) !== "undefined" && typeof (DeviceMotionEvent.requestPermission) === "function") {
             // (optional) Do something before API request prompt.
             DeviceMotionEvent.requestPermission()
@@ -386,13 +386,15 @@ $(function () {
                         window.addEventListener("devicemotion", (event) => {
 
                             // $('#coordinates').append('Permission granted. ');
-                            var x = event.accelerationIncludingGravity.x;
-                            var y = event.accelerationIncludingGravity.y;
-                            var z = event.accelerationIncludingGravity.z;
+                            var x = Math.floor(event.accelerationIncludingGravity.x);
+                            var y = Math.floor(event.accelerationIncludingGravity.y)+4;
+                            var z = Math.floor(event.accelerationIncludingGravity.z);
                             // alert('moveu!'+x+" "+y+" "+z);
-                            walk(Math.floor(x), Math.floor(y), 'warrior');
+                            if(x!=0 || y!=0)
+                                walk(x, y, 'warrior');
+                            
                             $('#coordinates').empty();
-                            $('#coordinates').append('LOC: ' + x.toFixed(2) + "," + y.toFixed(2) + "," + z.toFixed(2));
+                            $('#coordinates').append('LOC: ' + x.toFixed(0) + "," + y.toFixed(0) + "," + z.toFixed(0));
                         })
                     }
                 })
