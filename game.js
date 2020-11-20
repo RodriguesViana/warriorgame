@@ -381,18 +381,18 @@ $(function () {
             DeviceMotionEvent.requestPermission()
                 .then(response => {
                     // (optional) Do something after API prompt dismissed.
-                    $('#coordinates').append('Inside of then. ');
+                    // $('#coordinates').append('Inside of then. ');
                     if (response == "granted") {
                         window.addEventListener("devicemotion", (event) => {
 
-                            $('#coordinates').append('Permission granted. ');
+                            // $('#coordinates').append('Permission granted. ');
                             var x = event.accelerationIncludingGravity.x;
                             var y = event.accelerationIncludingGravity.y;
                             var z = event.accelerationIncludingGravity.z;
                             // alert('moveu!'+x+" "+y+" "+z);
-                            walk(warrior.stepSize, 0, 'warrior');
-                            $('#coordinates').clear();
-                            $('#coordinates').append('moveu '+x+","+y+","+z);
+                            walk(Math.floor(x), Math.floor(y), 'warrior');
+                            $('#coordinates').empty();
+                            $('#coordinates').append('LOC: ' + x.toFixed(2) + "," + y.toFixed(2) + "," + z.toFixed(2));
                         })
                     }
                 })
