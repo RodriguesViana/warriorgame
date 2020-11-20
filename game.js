@@ -381,9 +381,11 @@ $(function () {
             DeviceMotionEvent.requestPermission()
                 .then(response => {
                     // (optional) Do something after API prompt dismissed.
+                    $('#coordinates').append('Inside of then. ');
                     if (response == "granted") {
                         window.addEventListener("devicemotion", (event) => {
-                            // do something for 'e' here.
+
+                            $('#coordinates').append('Permission granted. ');
                             var x = event.accelerationIncludingGravity.x;
                             var y = event.accelerationIncludingGravity.y;
                             var z = event.accelerationIncludingGravity.z;
@@ -397,7 +399,7 @@ $(function () {
                 .catch(console.error)
         } else {
             // alert("DeviceMotionEvent is not defined");
-            // $('#coordinates').append(' No permission.');
+            $('#coordinates').append(' Permission denied.');
         }
     }
     $("#request").on("click", permission);
