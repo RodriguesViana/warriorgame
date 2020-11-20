@@ -388,7 +388,8 @@ $(function () {
                             var y = event.accelerationIncludingGravity.y;
                             var z = event.accelerationIncludingGravity.z;
                             // alert('moveu!'+x+" "+y+" "+z);
-                            walk(warrior.stepSize, 0, 'warrior'); console.log(`moveu ${x}, ${y}, ${z}`);
+                            walk(warrior.stepSize, 0, 'warrior');
+                            
                             $('#coordinates').append('moveu '+x+","+y+","+z);
                         })
                     }
