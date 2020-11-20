@@ -85,7 +85,7 @@ $(function () {
             `${imgPathDragon}dragon12.png`
         ],
         location: {
-            x: 400,
+            x: 180,
             y: -200,
         },
         walk: function (moveX, moveY) {
@@ -109,7 +109,7 @@ $(function () {
             `${imgPathPotion}potion.png`,
         ],
         location: {
-            x: 600,
+            x: 200,
             y: -100,
         },
         walk: function (moveX, moveY) {

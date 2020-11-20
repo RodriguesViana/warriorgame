@@ -253,12 +253,12 @@ html {
     background-color: green;
     position: absolute;
     margin: 0 auto;
-    width: 800px;
-    height: 500px;
+    width: 90%;
+    height: 600px;
 }
 
 .lifeBarRed {
-    width: 40px;
+    width: 30px;
     height: 5px;
     background-color: red;
     position: relative;
@@ -268,7 +268,7 @@ html {
 }
 
 .lifeBarGreen {
-    width: 40px;
+    width: 30px;
     height: 5px;
     background-color: lightgreen;
     position: relative;
@@ -284,6 +284,10 @@ html {
     right: 30;
 }
 
+.warriorImg {
+    width: 30px;
+}
+
 .dragon {
     width: 20px;
     height: 20px;
@@ -291,11 +295,11 @@ html {
 }
 
 .dragonImg {
-    width: 250px;
+    width: 150px;
 }
 
 .lifeBarRedDragon {
-    width: 200px;
+    width: 100px;
     height: 5px;
     background-color: red;
     position: relative;
@@ -305,7 +309,7 @@ html {
 }
 
 .lifeBarGreenDragon {
-    width: 200px;
+    width: 100px;
     height: 5px;
     background-color: lightgreen;
     position: relative;
