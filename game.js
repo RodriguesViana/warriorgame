@@ -391,7 +391,7 @@ $(function () {
                             var z = event.accelerationIncludingGravity.z;
                             // alert('moveu!'+x+" "+y+" "+z);
                             walk(warrior.stepSize, 0, 'warrior');
-                            
+                            $('#coordinates').clear();
                             $('#coordinates').append('moveu '+x+","+y+","+z);
                         })
                     }
