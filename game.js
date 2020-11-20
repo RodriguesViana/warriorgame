@@ -375,7 +375,7 @@ $(function () {
 
     function permission() {
         console.log('event asking for permission');
-        $('#coordinates').append('Asked permission. ');
+        $('#coordinates').append('1 Asked permission. ');
         if (typeof (DeviceMotionEvent) !== "undefined" && typeof (DeviceMotionEvent.requestPermission) === "function") {
             // (optional) Do something before API request prompt.
             DeviceMotionEvent.requestPermission()
