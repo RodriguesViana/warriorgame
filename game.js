@@ -313,7 +313,7 @@ $(function () {
         }, 200);
 
     }
-    //animateDragon();
+    animateDragon();
 
     const pickUpEquipment = function () {
         //Pick up a "helmet"
@@ -387,8 +387,9 @@ $(function () {
                             var y = event.accelerationIncludingGravity.y;
                             var z = event.accelerationIncludingGravity.z;
                             //alert('moveu!'+x+" "+y+" "+z);
-                            console.log('event');
-                            walk(warrior.stepSize, 0, 'warrior');
+                            // console.log('event');
+                            walk(warrior.stepSize, 0, 'warrior'); console.log(`moveu ${x}, ${y}, ${z}`);
+                            $('#coordinates').html(`moveu ${x}, ${y}, ${ z}`);
                         })
                     }
                 })
