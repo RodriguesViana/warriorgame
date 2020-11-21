@@ -22,6 +22,7 @@
 $(function () {
 
     let Points = 0;
+    $('#points').hide();
     const screenWidth = $('#cenario').width();
     const screenHeight = $('#cenario').height();
     console.log('Screen: ', screenWidth, ',', screenHeight);
@@ -163,8 +164,8 @@ $(function () {
 
     const addPoints = function (point) {
         Points += point;
-        $('#coordinates').empty();
-        $('#coordinates').append('SCORE: ', Points);
+        $('#points').empty();
+        $('#points').append('SCORE: ', Points);
     }
 
     const testCollisionPotion = function () {
@@ -468,6 +469,8 @@ $(function () {
 
     function permission() {
         // console.log('event asking for permission');
+        $('#request').hide();
+        $('#points').show();
         // $('#coordinates').append('Asked permission. ');
         if (typeof (DeviceMotionEvent) !== "undefined" && typeof (DeviceMotionEvent.requestPermission) === "function") {
             // (optional) Do something before API request prompt.
@@ -477,8 +480,6 @@ $(function () {
                     // $('#coordinates').append('Inside of then. ');
                     if (response == "granted") {
                         window.addEventListener("devicemotion", (event) => {
-
-
 
                             // $('#coordinates').append('Permission granted. ');
                             var x = Math.floor(event.accelerationIncludingGravity.x);
