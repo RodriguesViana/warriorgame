@@ -27,6 +27,10 @@ $(function () {
     $('#win').hide();
     $('#loose').hide();
 
+    $('#warrior').hide();
+    $('#dragon').hide();
+    $('#potion').hide();
+
     const screenWidth = $('#cenario').width();
     const screenHeight = $('#cenario').height();
     // console.log('Screen: ', screenWidth, ',', screenHeight);
@@ -149,21 +153,26 @@ $(function () {
         // console.log(e);
         e.preventDefault();
         callWarrior(e.key);
-
         testAllColisions();
     });
 
     const testAllColisions = function () {
+        setInterval(() => {
         testCollisionDragon();
-        testCollisionPotion();
+        }, 1000);
+        setInterval(() => {
+            testCollisionPotion();
+        }, 200);
 
     }
 
     const testCollisionDragon = function () {
-        if (isTouching(warrior, dragon)) {
-            changeWarriorLife(-10);
-            console.log("warrior touching dragon");
-        }
+        
+            if (isTouching(warrior, dragon)) {
+            changeWarriorLife(-1);
+            // console.log("warrior touching dragon");
+            };
+        
     }
 
     const addPoints = function (point) {
@@ -180,8 +189,8 @@ $(function () {
 
             potion.location.x = Math.random() * screenWidth * 0.7;
             potion.location.y = -Math.random() * screenHeight * 0.7;
-            console.log("warrior touching potion");
-            console.log("Moved to ", potion.location.x, potion.location.y);
+            // console.log("warrior touching potion");
+            // console.log("Moved to ", potion.location.x, potion.location.y);
             initializePotion();
             changeWarriorLife(potion.lifePoints);
         }
@@ -336,7 +345,6 @@ $(function () {
 
     const changeWarriorLife = function (points) {
         let currentW = $(".lifeBarGreen").width();
-        let currentWRed = $(".lifeBarGreen").width();
         let reduction = -points / (50 / warrior.size);
         $(".lifeBarGreen").width(currentW - reduction);
         warrior.strike(-points);
@@ -411,7 +419,7 @@ $(function () {
                 addY = dragon.stepSize;
 
             walk(addX, addY, 'dragon');
-            testAllColisions();
+            
         }, 200);
     }
     // moveDragonRandomly();
@@ -434,9 +442,11 @@ $(function () {
                 addY = -dragon.stepSize;
 
             walk(addX, addY, 'dragon');
-            testAllColisions();
+            
         }, 500);
     }
+
+
     
 
     const animateStrike = function () {
@@ -492,9 +502,11 @@ $(function () {
     }
     initializePotion();
 
-    function permission() {
+    function start() {
+        $('#warrior').show();
+        $('#dragon').show();
+        $('#potion').show();
         moveDragonToWarrior();
-        // console.log('event asking for permission');
         $('#request').hide();
         $('#points').show();
         // $('#coordinates').append('Asked permission. ');
@@ -518,8 +530,6 @@ $(function () {
                             // $('#coordinates').empty();
                             // $('#coordinates').append('LOC: ' + x.toFixed(0) + "," + y.toFixed(0) + "," + z.toFixed(0));
 
-                            testAllColisions();
-
                         })
                     }
                 })
@@ -531,6 +541,6 @@ $(function () {
     }
 
 
-    $("#request").on("click", permission);
+    $("#request").on("click", start);
 
 });
