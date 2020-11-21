@@ -398,6 +398,7 @@ $(function () {
                 clearInterval(animation);
         }, 100);
 
+        
     }
 
     const animateDragon = function () {
