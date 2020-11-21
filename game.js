@@ -21,6 +21,8 @@
 
 $(function () {
 
+    let Points = 0;
+
     // console.log('start');
     const imgPath = 'assets';
 
@@ -140,8 +142,34 @@ $(function () {
     });
 
     const testAllColisions = function() {
+        testCollisionDragon();
+        testCollisionPotion();
+
+    }
+
+    const testCollisionDragon = function () {
+        if (isTouching(warrior, dragon)) {
+            looseWarriorLife(10);
+            console.log("warrior touching dragon");
+        }
+    }
+
+    const addPoints = function (point){
+    Points += point;
+            $('#coordinates').empty();
+                            $('#coordinates').append('SCORE: ',Points);
+    }
+
+    const testCollisionPotion = function () {
         if (isTouching(warrior, potion)) {
-            $('#potion').hide();
+            // $('#potion').hide();
+            addPoints(1);
+           
+            potion.location.x = Math.random() * 200;
+            potion.location.y =-Math.random() * 200;
+            console.log("warrior touching potion");
+            console.log("Moved to ", potion.location.x, potion.location.y);
+            initializePotion();
         }
     }
 
@@ -159,7 +187,9 @@ $(function () {
         var a = l1x - l2x;
         var b = l1y - l2y;
         var c = Math.sqrt(a * a + b * b);
-        if (c < s1 + s2)
+        // console.log('Distance =', c);
+
+        if (c < s1/2 || c < s2/2)
             return true;
         else
             return false;
@@ -173,7 +203,7 @@ $(function () {
     }
 
     const callWarrior = function (key) {
-        let warriorStep = 10;
+    
         let warriorDamage = 2;
         if (warrior.energy > 0) {
             switch (key) {
@@ -277,34 +307,85 @@ $(function () {
         return image;
     }
 
+
+    const looseWarriorLife = function(points){
+        let currentW = $(".lifeBarGreen").width();
+        let reduction = points / (50 / warrior.size);
+        $(".lifeBarGreen").width(currentW - reduction);
+        warrior.strike(points);
+
+        testWarriorLife();
+    }
     const strike = function (points) {
         //Strike and loose energy points
         warrior.strike(points);
         animateStrike();
-        let currentW = $(".lifeBarGreen").width();
-        let reduction = points / (50 / 20);
-        $(".lifeBarGreen").width(currentW - reduction);
-
+        looseWarriorLife(points);    
 
         if (isTouching(warrior, dragon)) {
-
-            reduction = points * 3;
+            reduction = points * 10;
             dragon.strike(points * 3.5);
             let currentWD = $(".lifeBarGreenDragon").width();
             $(".lifeBarGreenDragon").width(currentWD - reduction);
-            // $('.lifeBarGreenDragon').hide();
-
         }
+        testAllLifes();
+        
+    }
+
+    const testAllLifes = function(){
+        testWarriorLife();
+        testDragonLife();
+    }
+  
+    const testWarriorLife = function () {
         if (warrior.energy <= 0) {
             myWarrior.hide();
         }
+    }
 
-        if (dragon.energy <= 0) {
+    const testDragonLife = function () {
+         if (dragon.energy <= 0) {
             myDragon.hide();
         }
     }
 
-  
+    const moveDragonRandomly = function(){
+        setInterval(() => {
+            let randomX = Math.random();
+        let randomY = Math.random();
+        let addX = 0;
+        let addY = 0;
+        if (randomX <= 0.2)
+            addX = -10;
+        if (randomX <= 0.4)
+            addX = 0;
+        if (randomX <= 0.6)
+            addX = 10;
+        
+        if (randomY <= 0.2)
+            addY = -10;
+        if (randomY <= 0.4)
+            addY = 0;
+        if (randomY <= 0.6)
+            addY = 10;
+        
+        dragon.location.x += addX;
+        if (dragon.location.x <= 0)
+            dragon.location.x = 0;
+        if (dragon.location.x >= 300)
+            dragon.location.x = 300;
+
+        dragon.location.y += addY;
+        if (dragon.location.y <= -400)
+            dragon.location.y = -400;
+        if (dragon.location.y >= 0)
+            dragon.location.y = 0;
+         
+        initializeDragon();
+        }, 400);
+    }
+
+    moveDragonRandomly();
 
     const animateStrike = function () {
         let times = 0;
@@ -315,7 +396,6 @@ $(function () {
             // console.log('times = ' + times + ' nImage =' + nImage);
             if (times >= warrior.images['S'].length)
                 clearInterval(animation);
-
         }, 100);
 
     }
@@ -340,6 +420,8 @@ $(function () {
 
     let myDragon = $('#dragon');
     let myDragonImg = $('#dragonImg');
+
+
 
     const initializeDragon = function () {
         myDragon.css('left', dragon.location.x);
@@ -378,8 +460,8 @@ $(function () {
                             if(x!=0 || y!=0)
                                 walk(x, y, 'warrior');
                             
-                            $('#coordinates').empty();
-                            $('#coordinates').append('LOC: ' + x.toFixed(0) + "," + y.toFixed(0) + "," + z.toFixed(0));
+                            // $('#coordinates').empty();
+                            // $('#coordinates').append('LOC: ' + x.toFixed(0) + "," + y.toFixed(0) + "," + z.toFixed(0));
 
                             testAllColisions();
                             
@@ -389,7 +471,7 @@ $(function () {
                 .catch(console.error)
         } else {
             // alert("DeviceMotionEvent is not defined");
-            $('#coordinates').append(' Permission denied.');
+            // $('#coordinates').append(' Permission denied.');
         }
     }
 

@@ -286,16 +286,19 @@ html {
 
 .warriorImg {
     width: 30px;
+    border: 1px dashed red;
 }
 
 .dragon {
     width: 20px;
     height: 20px;
     position: absolute;
+    border: 1px dashed blue;
 }
 
 .dragonImg {
     width: 150px;
+    border: 1px dashed red;
 }
 
 .lifeBarRedDragon {
