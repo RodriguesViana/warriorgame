@@ -377,7 +377,7 @@ $(function () {
     }
 
     const testWarriorLife = function () {
-        console.log('Warrior: ', warrior.energy);
+        // console.log('Warrior: ', warrior.energy);
         if (warrior.energy <= 0) {
             myWarrior.hide();
             $('#loose').show();
@@ -386,7 +386,7 @@ $(function () {
     }
 
     const testDragonLife = function () {
-        console.log('Dragon: ', dragon.energy);
+        // console.log('Dragon: ', dragon.energy);
         if (dragon.energy <= 0) {
             myDragon.hide();
             $('#win').show();
