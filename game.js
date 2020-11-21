@@ -21,11 +21,12 @@
 
 $(function () {
 
-    console.log('start');
+    // console.log('start');
     const imgPath = 'assets';
 
     let imgPathWarrior = `${imgPath}/warrior/`
     const warrior = {
+        size: 30,
         equipment: ["sword", "shield"],
         energy: 100,
         stepSize: 10,
@@ -67,6 +68,7 @@ $(function () {
 
     let imgPathDragon = `${imgPath}/dragon/`;
     const dragon = {
+        size: 150,
         energy: 200,
         thisImage: 0,
         stepSize: 10,
@@ -93,7 +95,7 @@ $(function () {
             this.location.y += moveY;
         },
         strike: function (deplete) {
-            console.log(this.energy);
+            // console.log(this.energy);
             this.energy -= deplete;
         },
         pickUpEquipment: function (item) {
@@ -103,6 +105,7 @@ $(function () {
 
     let imgPathPotion = `${imgPath}/potions/`;
     const potion = {
+        size: 20,
         energy: 200,
         thisImage: 0,
         images: [
@@ -117,7 +120,7 @@ $(function () {
             this.location.y += moveY;
         },
         strike: function (deplete) {
-            console.log(this.energy);
+            // console.log(this.energy);
             this.energy -= deplete;
         },
         pickUpEquipment: function (item) {
@@ -129,19 +132,41 @@ $(function () {
     let myWarriorImg = $('#warriorImg');
 
     $(document).on('keydown', function (e) {
-        console.log(e);
+        // console.log(e);
         e.preventDefault();
         callWarrior(e.key);
+
+        if (isTouching(warrior, potion)) {
+            $('#potion').hide();
+        }
     });
 
+    const isTouching = function (c1, c2) {
+        // console.log(`C1: ${c1.location.x},${c1.location.y} - C2: ${c2.location.x},${c2.location.y}`);
 
-    // $('cenario').bind('tap', function (e) {
-    //     // console.log(e);
-    //     // e.preventDefault();
-    //     console.log(e);
-    //     console.log('tap!');
-    //     callWarrior('d');
-    // });
+        let l1x = c1.location.x;
+        let l1y = c1.location.y;
+        let s1 = c1.size;
+        
+        let l2x = c2.location.x;
+        let l2y = c2.location.y;
+        let s2 = c2.size;
+        
+        var a = l1x - l2x;
+        var b = l1y - l2y;
+        var c = Math.sqrt(a * a + b * b);
+        if (c < s1 + s2)
+            return true;
+        else
+            return false;
+        
+
+        // if (c1.location.x == c2.location.x && c1.location.y == c2.location.y) {
+        //     return true;
+        // } else {
+        //     return false;
+        // }
+    }
 
     const callWarrior = function (key) {
         let warriorStep = 10;
@@ -183,7 +208,7 @@ $(function () {
                     pickUpEquipment();
                     break;
                 default:
-                    console.log(key);
+                    // console.log(key);
                     break;
             }
         }
@@ -201,7 +226,7 @@ $(function () {
             charDiv = myDragon;
             charImg = myDragonImg;
         }
-        console.log(char.location);
+        // console.log(char.location);
         //Move it 
         if ((char.location.x + x) < 0)
             x = 0;
@@ -257,7 +282,7 @@ $(function () {
         $(".lifeBarGreen").width(currentW - reduction);
 
 
-        if (isTouching(warrior.location, dragon.location)) {
+        if (isTouching(warrior, dragon)) {
 
             reduction = points * 3;
             dragon.strike(points * 3.5);
@@ -275,19 +300,7 @@ $(function () {
         }
     }
 
-    const isTouching = function (wl, dl) {
-
-
-        if (wl.x == dl.x && wl.y == dl.y) {
-            console.log("Warrior:");
-            console.log(wl);
-            console.log("Dragon:");
-            console.log(dl);
-            return true;
-        } else {
-            return false;
-        }
-    }
+  
 
     const animateStrike = function () {
         let times = 0;
@@ -305,10 +318,8 @@ $(function () {
 
     const animateDragon = function () {
         setInterval(() => {
-
             let nImage = getNextImageDragon();
             myDragonImg.attr('src', nImage);
-
 
         }, 200);
 
@@ -320,7 +331,7 @@ $(function () {
         warrior.pickUpEquipment("helmet");
 
         //Log the current equipment list
-        console.log(warrior.equipment);
+        // console.log(warrior.equipment);
     }
 
     let myDragon = $('#dragon');
@@ -341,40 +352,8 @@ $(function () {
     }
     initializePotion();
 
-    // if (window.DeviceMotionEvent) {
-    //     // alert('Device Motion added');
-    //     window.addEventListener("devicemotion", motion, false);
-    // } else {
-    //     alert("DeviceMotionEvent is not supported");
-    // }
-    // function motion(event) {
-
-    //     let text = ("Accelerometer: "
-    //         + event.accelerationIncludingGravity.x + ", "
-    //         + event.accelerationIncludingGravity.y + ", "
-    //         + event.accelerationIncludingGravity.z
-    //     );
-    //     alert(text);
-    // }
-
-    // if (window.DeviceOrientationEvent) {
-    //     // alert('Orientation added');
-    //     window.addEventListener("deviceorientation", orientation, false);
-    // } else {
-    //     alert("DeviceOrientationEvent is not supported");
-    // }
-
-    // function orientation(event) {
-    //     let text=("Magnetometer: "
-    //         + event.alpha + ", "
-    //         + event.beta + ", "
-    //         + event.gamma
-    //     );
-    //     alert(text);
-    // }
-
     function permission() {
-        console.log('event asking for permission');
+        // console.log('event asking for permission');
         // $('#coordinates').append('Asked permission. ');
         if (typeof (DeviceMotionEvent) !== "undefined" && typeof (DeviceMotionEvent.requestPermission) === "function") {
             // (optional) Do something before API request prompt.
@@ -395,6 +374,8 @@ $(function () {
                             
                             $('#coordinates').empty();
                             $('#coordinates').append('LOC: ' + x.toFixed(0) + "," + y.toFixed(0) + "," + z.toFixed(0));
+
+                            
                         })
                     }
                 })
@@ -404,6 +385,8 @@ $(function () {
             $('#coordinates').append(' Permission denied.');
         }
     }
+
+    
     $("#request").on("click", permission);
 
 });
