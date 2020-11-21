@@ -136,10 +136,14 @@ $(function () {
         e.preventDefault();
         callWarrior(e.key);
 
+        testAllColisions();
+    });
+
+    const testAllColisions = function() {
         if (isTouching(warrior, potion)) {
             $('#potion').hide();
         }
-    });
+    }
 
     const isTouching = function (c1, c2) {
         // console.log(`C1: ${c1.location.x},${c1.location.y} - C2: ${c2.location.x},${c2.location.y}`);
@@ -364,6 +368,8 @@ $(function () {
                     if (response == "granted") {
                         window.addEventListener("devicemotion", (event) => {
 
+
+                            
                             // $('#coordinates').append('Permission granted. ');
                             var x = Math.floor(event.accelerationIncludingGravity.x);
                             var y = Math.floor(event.accelerationIncludingGravity.y)+4;
@@ -375,6 +381,7 @@ $(function () {
                             $('#coordinates').empty();
                             $('#coordinates').append('LOC: ' + x.toFixed(0) + "," + y.toFixed(0) + "," + z.toFixed(0));
 
+                            testAllColisions();
                             
                         })
                     }
