@@ -285,6 +285,12 @@ $(function () {
             charDiv = myDragon;
             charImg = myDragonImg;
         }
+
+        if (character == "potion") {
+            char = potion;
+            charDiv = myPotion;
+            charImg = myPotionImg;
+        }
         // console.log(char.location);
         //Move it 
         if ((char.location.x + x) < 0)
@@ -380,6 +386,9 @@ $(function () {
         // console.log('Warrior: ', warrior.energy);
         if (warrior.energy <= 0) {
             myWarrior.hide();
+            myPotion.hide();
+            walk(-1000, -1000, 'warrior');
+            walk(-1000, -1000, 'potion');
             $('#loose').show();
         }
 
@@ -388,7 +397,7 @@ $(function () {
     const testDragonLife = function () {
         // console.log('Dragon: ', dragon.energy);
         if (dragon.energy <= 0) {
-            myDragon.hide();
+            walk(-1000, -1000, 'dragon');
             $('#win').show();
         }
     }
