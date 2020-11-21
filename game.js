@@ -397,7 +397,10 @@ $(function () {
     const testDragonLife = function () {
         // console.log('Dragon: ', dragon.energy);
         if (dragon.energy <= 0) {
+            myDragon.hide();
+            myPotion.hide();
             walk(-1000, -1000, 'dragon');
+            walk(-1000, -1000, 'potion');
             $('#win').show();
         }
     }
