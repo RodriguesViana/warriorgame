@@ -19,17 +19,12 @@
 //   Transform the dragon into a person
 //   Add animations to characters
 
+
 $(function () {
 
     let Points = 0;
     let Damage = 0;
-    $('#points').hide();
-    $('#win').hide();
-    $('#loose').hide();
-
-    $('#warrior').hide();
-    $('#dragon').hide();
-    $('#potion').hide();
+    
 
     const screenWidth = $('#cenario').width();
     const screenHeight = $('#cenario').height();

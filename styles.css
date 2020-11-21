@@ -276,6 +276,10 @@ html {
     right: 0;
 }
 
+.warrior, .dragon, .potion, .win, .loose, .points {
+    display: none;
+}
+
 .warrior {
     width: 20px;
     height: 20px;
@@ -337,6 +341,7 @@ html {
     margin-top: 50px;
     width: 50%;
     height: 50px;
+    display: none;
 }
 
 .win {
