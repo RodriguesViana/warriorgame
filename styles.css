@@ -329,3 +329,22 @@ html {
 .potionImg {
     width: 20px;
 }
+
+.win, .loose {
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+    width: 50%;
+    height: 50px;
+}
+
+.win {
+    background-color: yellow;
+    color: blue;
+}
+
+.loose {
+    background-color: red;
+    color: purple;
+}

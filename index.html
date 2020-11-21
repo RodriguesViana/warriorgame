@@ -17,11 +17,13 @@
             <h2>WASD or move your device</h2>
             <!-- (3) Pick up equipment -->
             <h3>Potion gives you life and points.</h3>
+            <h3>Every point remove life from Dragon.</h3>
         </div>
         <div class='enemies dragonText'>
             <h1>The Dragon</h1>
             <h2>Moves randomly</h2>
             <h3>Touching dragon removes life.</h3>
+            <h3>Tip: Dragon follows you.</h3>
             <!-- (3) Pick up equipment -->
         </div>
 
@@ -35,24 +37,25 @@
     <main class='container geral'>
        
         <div id='cenario' class='cenario'>
-
-            <div id='warrior' class='warrior'>
-
-                <div id='lifeBarRed' class='lifeBarRed'></div>
-                <div id='lifeBarGreen' class='lifeBarGreen'></div>
-                <img id='warriorImg' class='warriorImg' src='assets/warrior/warriorMini-r1.png'>
-            </div>
+<div id='potion' class='potion'>
+    <img id='potionImg' class='potionImg' src='assets/potions/potion.png'>
+</div>
+            
             <div id='dragon' class='dragon'>
 
                 <div id='lifeBarRedDragon' class='lifeBarRedDragon'></div>
                 <div id='lifeBarGreenDragon' class='lifeBarGreenDragon'></div>
                 <img id='dragonImg' class='dragonImg' src='assets/dragon/dragon1.png'>
             </div>
+<div id='warrior' class='warrior'>
 
+    <div id='lifeBarRed' class='lifeBarRed'></div>
+    <div id='lifeBarGreen' class='lifeBarGreen'></div>
+    <img id='warriorImg' class='warriorImg' src='assets/warrior/warriorMini-r1.png'>
+</div>
 
-            <div id='potion' class='potion'>
-                <img id='potionImg' class='potionImg' src='assets/potions/potion.png'>
-            </div>
+           <div id="win" class="win">YOU WIN!</div>
+        <div id="loose" class="loose">YOU LOOSE!</div>
 
         </div>
 

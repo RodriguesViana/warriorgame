@@ -22,10 +22,14 @@
 $(function () {
 
     let Points = 0;
+    let Damage = 0;
     $('#points').hide();
+    $('#win').hide();
+    $('#loose').hide();
+
     const screenWidth = $('#cenario').width();
     const screenHeight = $('#cenario').height();
-    console.log('Screen: ', screenWidth, ',', screenHeight);
+    // console.log('Screen: ', screenWidth, ',', screenHeight);
 
     // console.log('start');
     const imgPath = 'assets';
@@ -77,7 +81,7 @@ $(function () {
     const dragon = {
         name: 'Dragon',
         size: 150,
-        energy: 200,
+        energy: 100,
         thisImage: 0,
         stepSize: 10,
         images: [
@@ -95,8 +99,8 @@ $(function () {
             `${imgPathDragon}dragon12.png`
         ],
         location: {
-            x: 180,
-            y: -200,
+            x: screenWidth-150,
+            y: -screenHeight+150,
         },
         walk: function (moveX, moveY) {
             this.location.x += moveX;
@@ -122,8 +126,8 @@ $(function () {
             `${imgPathPotion}potion.png`,
         ],
         location: {
-            x: 200,
-            y: -100,
+            x: screenWidth/3,
+            y: -screenHeight/3,
         },
         walk: function (moveX, moveY) {
             this.location.x += moveX;
@@ -164,6 +168,7 @@ $(function () {
 
     const addPoints = function (point) {
         Points += point;
+        Damage += point;
         $('#points').empty();
         $('#points').append('SCORE: ', Points);
     }
@@ -173,13 +178,19 @@ $(function () {
             // $('#potion').hide();
             addPoints(1);
 
-            potion.location.x = Math.random() * 200;
-            potion.location.y = -Math.random() * 200;
+            potion.location.x = Math.random() * screenWidth * 0.7;
+            potion.location.y = -Math.random() * screenHeight * 0.7;
             console.log("warrior touching potion");
             console.log("Moved to ", potion.location.x, potion.location.y);
             initializePotion();
             changeWarriorLife(potion.lifePoints);
         }
+        testDamage();
+    }
+
+    const testDamage = function (){
+        attackDragon(Damage);
+        Damage = 0;
     }
 
     const isTouching = function (c1, c2) {
@@ -279,7 +290,7 @@ $(function () {
 
         if ((char.location.x + x) >= screenWidth - char.size)
             x = 0;
-        if ((char.location.y + y) <= -screenHeight + 2*char.size)
+        if ((char.location.y + y) <= -screenHeight)
             y = 0;
 
         char.walk(x, y);
@@ -348,20 +359,34 @@ $(function () {
 
     }
 
+    const attackDragon = function (points) {
+            let reduction = points * 10;
+            dragon.strike(reduction);
+            let currentWD = $(".lifeBarGreenDragon").width();
+            $(".lifeBarGreenDragon").width(currentWD - reduction);
+        testAllLifes();
+
+    }
+
     const testAllLifes = function () {
         testWarriorLife();
         testDragonLife();
     }
 
     const testWarriorLife = function () {
+        console.log('Warrior: ',warrior.energy);
         if (warrior.energy <= 0) {
             myWarrior.hide();
+            $('#loose').show();
         }
+        
     }
 
     const testDragonLife = function () {
+        console.log('Dragon: ', dragon.energy);
         if (dragon.energy <= 0) {
             myDragon.hide();
+            $('#win').show();
         }
     }
 
@@ -389,30 +414,30 @@ $(function () {
             testAllColisions();
         }, 200);
     }
-
     // moveDragonRandomly();
 
 
     const moveDragonToWarrior = function () {
+        
         setInterval(() => {
 
             let addX = 0;
             let addY = 0;
             if (dragon.location.x <= warrior.location.x)
                 addX = dragon.stepSize;
-            if (dragon.location.x >= warrior.location.x)
+            else if (dragon.location.x >= warrior.location.x)
                 addX = -dragon.stepSize;
 
             if (dragon.location.y <= warrior.location.y)
-                addY = -dragon.stepSize;
-            if (dragon.location.x >= warrior.location.y)
                 addY = dragon.stepSize;
+            else if (dragon.location.y >= warrior.location.y)
+                addY = -dragon.stepSize;
 
             walk(addX, addY, 'dragon');
             testAllColisions();
         }, 500);
     }
-    moveDragonToWarrior();
+    
 
     const animateStrike = function () {
         let times = 0;
@@ -468,6 +493,7 @@ $(function () {
     initializePotion();
 
     function permission() {
+        moveDragonToWarrior();
         // console.log('event asking for permission');
         $('#request').hide();
         $('#points').show();
